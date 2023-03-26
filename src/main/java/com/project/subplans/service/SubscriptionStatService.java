@@ -30,8 +30,18 @@ public class SubscriptionStatService {
         return modelMapper.map(subscriptionList, new TypeToken<List<SubscriptionDTO>>(){}.getType()); //ArrayList
     }
 
-    public int getfreeplanuserscount(){
-        int count = subscriptionStatRepo.getFreePlanUserCount();
+//    public int getfreeplanuserscount(){
+//        int count = subscriptionStatRepo.getFreePlanUserCount();
+//        return count;
+//    }
+
+    public int[] getPlanUsersCount(){
+        int[] count = new int[4];
+        count[0] = subscriptionStatRepo.getFreePlanUserCount();
+        count[1] = subscriptionStatRepo.getBronzePlanUserCount();
+        count[2] = subscriptionStatRepo.getSilverPlanUserCount();
+        count[3] = subscriptionStatRepo.getGoldPlanUserCount();
         return count;
     }
+
 }

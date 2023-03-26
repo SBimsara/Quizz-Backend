@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(value = "api/v1/subscriptionStat")
 public class SubscriptionStatController {
@@ -18,14 +19,14 @@ public class SubscriptionStatController {
         return subscriptionStatService.getSubscriptionData();
     }
 
-    @GetMapping(value = "/getFreePlanCount")
-    public int getFreePlanCount(){
-        return subscriptionStatService.getfreeplanuserscount();
+    @GetMapping(value = "/getPlanUserCount")
+    public int[] getPlanUserCount(){
+        return subscriptionStatService.getPlanUsersCount();
     }
 
     @PostMapping(value = "/saveSubscriptionStat")
     public SubscriptionDTO savesubscriptionStat(@RequestBody SubscriptionDTO subscriptionDTO){
         return subscriptionStatService.saveSubscripion(subscriptionDTO);
     }
-    
+
 }
