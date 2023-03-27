@@ -102,8 +102,8 @@ public class PlanController {
 //        }
     }
 
-/*    @DeleteMapping("/deletePlan/{planId}")
-    public boolean deletePlan(@PathVariable int planId) {
+    @DeleteMapping("/deletePlan/{planId}")
+    public boolean deletePlan(@PathVariable String planId) {
         return planService.deletePlan(planId);
 //        try{
 //            String res = planService.deletePlan(planId);
@@ -130,7 +130,7 @@ public class PlanController {
 //            return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 //        }
     }
- */
+
 
     @GetMapping(value = "/getAllPlans")
     public List<PlanDTO> getAllPlans (){

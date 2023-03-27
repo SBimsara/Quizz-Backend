@@ -56,8 +56,9 @@ public class PlanService {
 //        }
     }
 
-/*    public boolean deletePlan(int planId){
-        planRepo.delete(modelMapper.map(planDTO,Plan.class));
+    public boolean deletePlan(String planId){
+        Plan plan = planRepo.getPlanById(planId);
+        planRepo.delete(modelMapper.map(plan,Plan.class));
         return true;
 //        if(planRepo.existsById(planId)){
 //            planRepo.deleteById(planId);
@@ -67,7 +68,7 @@ public class PlanService {
 //            return StatusList.RSP_NO_DATA_FOUND;
 //        }
     }
-*/
+
 
     public List<PlanDTO> getALlPlans() {
         List<Plan> planList=planRepo.findAll();
