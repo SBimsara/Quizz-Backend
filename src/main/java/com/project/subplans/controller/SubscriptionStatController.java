@@ -1,8 +1,10 @@
 package com.project.subplans.controller;
 
+import com.project.subplans.dto.PlanCountDTO;
 import com.project.subplans.dto.SubscriptionDTO;
 import com.project.subplans.service.SubscriptionStatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,9 +21,14 @@ public class SubscriptionStatController {
         return subscriptionStatService.getSubscriptionData();
     }
 
-    @GetMapping(value = "/getPlanUserCount")
-    public int[] getPlanUserCount(){
-        return subscriptionStatService.getPlanUsersCount();
+//    @GetMapping(value = "/getPlanUserCount")
+//    public int[] getPlanUserCount(){
+//        return subscriptionStatService.getPlanUsersCount();
+//    }
+
+    @GetMapping(value = "/getPlanCount")
+    public ResponseEntity<List<PlanCountDTO>> getCountByPlan() {
+        return subscriptionStatService.getGroupbyUserCount();
     }
 
     @PostMapping(value = "/saveSubscriptionStat")

@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @Data
 public class SubscriptionDTO {
     private int id;
-    private String planID;
+    private int planID;
 }
