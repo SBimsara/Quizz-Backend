@@ -1,8 +1,11 @@
 package com.project.subplans.service;
 
+import com.project.subplans.dto.RegisteredUserCountDTO;
 import com.project.subplans.dto.UserDTO;
 import com.project.subplans.entity.Plan;
+import com.project.subplans.entity.RegisteredUserCount;
 import com.project.subplans.entity.User;
+import com.project.subplans.repo.RegisteredUserCountRepo;
 import com.project.subplans.repo.UserStatRepo;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;

@@ -1,5 +1,7 @@
 package com.project.subplans.controller;
 
+import com.project.subplans.dto.PlanDTO;
+import com.project.subplans.dto.RegisteredUserCountDTO;
 import com.project.subplans.dto.UserDTO;
 import com.project.subplans.service.UserStatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/v1/userStat")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserStatController {
     @Autowired
     UserStatService userStatService;
