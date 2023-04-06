@@ -1,0 +1,36 @@
+/*
+
+ Service class for managing Admin entity
+ */
+package com.project.subplans.service;
+
+import com.project.subplans.dto.AdminDTO;
+import com.project.subplans.entity.Admin;
+import com.project.subplans.repo.AdminRepo;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@Transactional // Defines the scope of a single database transaction, that is, all the operations inside this service method will be performed as a single transaction
+public class AdminService {
+    @Autowired // Used for automatic dependency injection of the AdminRepo object
+    private AdminRepo adminRepo;
+
+    @Autowired // Used for automatic dependency injection of the ModelMapper object
+    private ModelMapper modelMapper;
+
+    /*
+
+     Saves the details of the admin by mapping the AdminDTO object to the Admin entity and
+     persisting the latter using the adminRepo object.
+     @param adminDTO The AdminDTO object containing the details of the admin to be saved
+     @return The saved AdminDTO object
+     */
+
+    public AdminDTO saveDetails(AdminDTO adminDTO) {
+        adminRepo.save(modelMapper.map(adminDTO, Admin.class));
+        return adminDTO;
+    }
+}
