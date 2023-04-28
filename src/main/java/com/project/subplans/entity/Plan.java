@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class Plan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int pid;
+    private int id;
     private String name;
     private float price;
     private float discount;

@@ -4,14 +4,14 @@ package com.project.subplans.service;
 import com.project.subplans.dto.PlanDTO;
 import com.project.subplans.entity.Plan;
 import com.project.subplans.repo.PlanRepo;
-//import com.project.subplans.util.StatusList;
+import com.project.subplans.util.StatusList;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,49 +24,50 @@ public class PlanService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public PlanDTO savePlan(PlanDTO planDTO) {
+    public String savePlan(PlanDTO planDTO) {
 
-        planRepo.save(modelMapper.map(planDTO, Plan.class));
-        return planDTO;
+//        planRepo.save(modelMapper.map(planDTO, Plan.class));
+//        return planDTO;
 
-//        if(planRepo.existsById(planDTO.getPid())) {
-//            return StatusList.RSP_DUPLICATED;
-//        }
-//        else{
-//            planRepo.save(modelMapper.map(planDTO, Plan.class));
-//            return StatusList.RSP_SUCCESS;
-//        }
+        if(planRepo.existsById(planDTO.getId())) {
+            return StatusList.RSP_DUPLICATED;
+        }
+        else{
+            planRepo.save(modelMapper.map(planDTO, Plan.class));
+            return StatusList.RSP_SUCCESS;
+        }
     }
 
     public PlanDTO getPlanByPlanId(String planId) {
+
         Plan plan=planRepo.getPlanById(planId);
         return modelMapper.map(plan,PlanDTO.class);
     }
 
-    public PlanDTO updatePlan(PlanDTO planDTO) {
-        planRepo.save(modelMapper.map(planDTO, Plan.class));
-        return planDTO;
+    public String updatePlan(PlanDTO planDTO) {
+//        planRepo.save(modelMapper.map(planDTO, Plan.class));
+//        return true;
 
-//        if(planRepo.existsById(planDTO.getPid())){
-//            planRepo.save(modelMapper.map(planDTO, Plan.class));
-//            return StatusList.RSP_SUCCESS;
-//        }
-//        else{
-//            return StatusList.RSP_NO_DATA_FOUND;
-//        }
+        if(planRepo.existsById(planDTO.getId())){
+            planRepo.save(modelMapper.map(planDTO, Plan.class));
+            return StatusList.RSP_SUCCESS;
+        }
+        else{
+            return StatusList.RSP_NO_DATA_FOUND;
+        }
     }
 
-    public boolean deletePlan(String planId){
-        Plan plan = planRepo.getPlanById(planId);
-        planRepo.delete(modelMapper.map(plan,Plan.class));
-        return true;
-//        if(planRepo.existsById(planId)){
-//            planRepo.deleteById(planId);
-//            return StatusList.RSP_SUCCESS;
-//        }
-//        else{
-//            return StatusList.RSP_NO_DATA_FOUND;
-//        }
+    public String deletePlan(int planId){
+//        Plan plan = planRepo.getPlanById(planId);
+//        planRepo.delete(modelMapper.map(plan,Plan.class));
+//        return true;
+        if(planRepo.existsById(planId)){
+            planRepo.deleteById(planId);
+            return StatusList.RSP_SUCCESS;
+        }
+        else{
+            return StatusList.RSP_NO_DATA_FOUND;
+        }
     }
 
 
