@@ -47,4 +47,10 @@ public class SubjectController {
         System.out.println("User ID :"+ subjectID +"User grade :" +grade);
         return subjectService.getSubjectBySubjectIDAndGrade(subjectID,grade);
     }
+
+    @DeleteMapping("/deleteSubjectById/{subId}")
+
+    public boolean deleteSubjectById(@PathVariable String subjectID) {
+        return subjectService.deleteSubjectById(subjectID);
+    }
 }

@@ -53,4 +53,14 @@ public class SubjectService {
         return modelMapper.map(subject,SubjectDTO.class);
     }
 
+    public boolean deleteSubjectById(String subjectID){
+        int sID = Integer.parseInt(subjectID);
+
+        if(subjectRepo.existsById(sID)){
+            subjectRepo.deleteById(sID);
+            return true;
+        }
+        return false;
+    }
+
 }
