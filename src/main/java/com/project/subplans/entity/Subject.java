@@ -5,22 +5,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+
 
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-@Table(name = "Plan")
-public class Plan {
+@Table(name = "Subject")
+public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-    private float price;
-    private float discount;
+    private String subjectname;
+    private String grade;
 
-    @OneToMany(mappedBy = "plan")
-    private List<Subject> subject;
+    @ManyToOne
+    @JoinColumn(name = "plan_id")
+    private Plan plan;
 
 }
