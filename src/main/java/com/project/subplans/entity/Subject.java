@@ -19,4 +19,8 @@ public class Subject {
     private String subjectname;
     private String grade;
 
+    @ManyToOne
+    @JoinColumn(name = "plan_id")
+    private Plan plan;
+
 }

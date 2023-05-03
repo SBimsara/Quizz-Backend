@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,5 +19,8 @@ public class Plan {
     private String name;
     private float price;
     private float discount;
+
+    @OneToMany(mappedBy = "plan")
+    private List<Subject> subject;
 
 }
