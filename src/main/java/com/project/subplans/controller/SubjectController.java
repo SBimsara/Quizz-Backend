@@ -50,7 +50,7 @@ public class SubjectController {
 
     @DeleteMapping("/deleteSubjectById/{subId}")
 
-    public boolean deleteSubjectById(@PathVariable String subjectID) {
-        return subjectService.deleteSubjectById(subjectID);
+    public boolean deleteSubjectById(@PathVariable String subId) {
+        return subjectService.deleteSubjectById(subId);
     }
 }
