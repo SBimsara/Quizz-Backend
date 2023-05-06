@@ -1,8 +1,10 @@
 package com.project.subplans.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -21,7 +23,8 @@ public class Plan {
     private float price;
     private float discount;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("plans")
+    @ManyToMany
     @JoinTable(name = "Subscriptioned Subjects",
     joinColumns = {
             @JoinColumn(name = "plan_id",referencedColumnName = "id")

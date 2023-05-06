@@ -1,8 +1,10 @@
 package com.project.subplans.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -20,9 +22,10 @@ public class Subject {
     private String subjectname;
     private String grade;
 
-    @ManyToMany(mappedBy = "subjects",fetch = FetchType.LAZY)
-    private Set<Plan> plans;
 
+    @JsonIgnoreProperties("subjects")
+    @ManyToMany(mappedBy = "subjects")
+    private Set<Plan> plans ;
 
 
 }
