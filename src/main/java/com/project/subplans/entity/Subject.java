@@ -1,16 +1,17 @@
 package com.project.subplans.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.util.Set;
 
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Setter
+@Getter
+
 @Table(name = "Subject")
 public class Subject {
     @Id
@@ -19,8 +20,9 @@ public class Subject {
     private String subjectname;
     private String grade;
 
-    @ManyToOne
-    @JoinColumn(name = "plan_id")
-    private Plan plan;
+    @ManyToMany(mappedBy = "subjects",fetch = FetchType.LAZY)
+    private Set<Plan> plans;
+
+
 
 }
