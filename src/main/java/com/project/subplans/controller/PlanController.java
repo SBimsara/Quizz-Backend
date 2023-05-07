@@ -165,6 +165,18 @@ public class PlanController {
         }
     }
 
+    @PutMapping(value = "addSubject/plans/{planId}/subjects/{subjectId}")
+    public boolean addSubjectToPlan(@PathVariable String planId,@PathVariable String subjectId){
+        return planService.addSubjectToPlan(planId,subjectId);
+
+
+    }
+
+    @DeleteMapping(value = "removeSubject/plans/{planId}/subjects/{subjectId}")
+    public boolean removeSubjectFromPlan(@PathVariable String planId,@PathVariable String subjectId){
+        return planService.removeSubjectFromPlan(planId,subjectId);
+
+    }
 
 
 

@@ -3,7 +3,9 @@ package com.project.subplans.service;
 
 import com.project.subplans.dto.PlanDTO;
 import com.project.subplans.entity.Plan;
+import com.project.subplans.entity.Subject;
 import com.project.subplans.repo.PlanRepo;
+import com.project.subplans.repo.SubjectRepo;
 import com.project.subplans.util.StatusList;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
@@ -20,6 +22,9 @@ public class PlanService {
 
     @Autowired
     private PlanRepo planRepo;
+
+    @Autowired
+    private SubjectRepo subjectRepo;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -57,6 +62,8 @@ public class PlanService {
         }
     }
 
+
+
     public String deletePlan(int planId){
 //        Plan plan = planRepo.getPlanById(planId);
 //        planRepo.delete(modelMapper.map(plan,Plan.class));
@@ -77,6 +84,40 @@ public class PlanService {
     }
 
 
+    public boolean addSubjectToPlan (String planId, String subjectId){
+
+        if(planRepo.existsById(Integer.parseInt(planId))){
+            Plan plan = planRepo.getPlanById(planId);
+            if(subjectRepo.existsById(Integer.parseInt(subjectId))){
+                Subject subject = subjectRepo.getSubjectBySubjectID(subjectId);
+
+                plan.getSubjects().add(subject);
+                planRepo.save(plan);
+
+                return true;
+            }
+            return false;
+        }
+        return false;
+
+    }
+
+    public boolean removeSubjectFromPlan (String planId, String subjectId){
+
+        if(planRepo.existsById(Integer.parseInt(planId))){
+            Plan plan = planRepo.getPlanById(planId);
+            if(subjectRepo.existsById(Integer.parseInt(subjectId))){
+                Subject subject = subjectRepo.getSubjectBySubjectID(subjectId);
+
+                plan.getSubjects().remove(subject);
+                planRepo.save(plan);
+
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
 
 
 
