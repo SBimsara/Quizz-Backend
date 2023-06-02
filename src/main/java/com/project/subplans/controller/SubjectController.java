@@ -53,6 +53,11 @@ public class SubjectController {
         return subjectService.deleteSubjectById(subId);
     }
 
+    @PutMapping("/addLessonToSubject/{subjectID}/{lessonID}")
+    public boolean addLessonToSubject(@PathVariable String subjectID, @PathVariable String lessonID){
+        return subjectService.addLessonToSubject(subjectID,lessonID);
+    }
+
     
 
 }

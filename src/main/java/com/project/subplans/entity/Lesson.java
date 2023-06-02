@@ -20,7 +20,7 @@ public class Lesson {
     private String lessonName;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "subject_id")
     private Subject subject;
 
 

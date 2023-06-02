@@ -1,7 +1,9 @@
 package com.project.subplans.service;
 
 import com.project.subplans.dto.SubjectDTO;
+import com.project.subplans.entity.Lesson;
 import com.project.subplans.entity.Subject;
+import com.project.subplans.repo.LessonRepo;
 import com.project.subplans.repo.SubjectRepo;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
@@ -21,6 +23,8 @@ public class SubjectService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired LessonRepo lessonRepo;
 
     public SubjectDTO saveSubject(SubjectDTO subjectDTO) {
         subjectRepo.save(modelMapper.map(subjectDTO, Subject.class));
@@ -62,6 +66,23 @@ public class SubjectService {
 //            return true;
             subjectRepo.deleteById(sID);
             return true;
+        }
+        return false;
+    }
+
+    public boolean addLessonToSubject(String subjectID, String lessonID){
+
+        if(subjectRepo.existsById(Integer.parseInt(subjectID))){
+            Subject subject = subjectRepo.getSubjectBySubjectID(subjectID);
+
+            if(lessonRepo.existsById(Integer.parseInt(lessonID))){
+                Lesson lesson = lessonRepo.getLessonByLessonID(lessonID);
+
+                subject.getLessons().add(lesson);
+                subjectRepo.save(subject);
+                return true;
+            }
+            return false;
         }
         return false;
     }
