@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 
 
 @Entity
@@ -19,8 +20,7 @@ public class Subject {
     private String subjectname;
     private String grade;
 
-    @ManyToOne
-    @JoinColumn(name = "plan_id")
-    private Plan plan;
+    @OneToMany(mappedBy = "subject")
+    private List<Lesson> lessons;
 
 }

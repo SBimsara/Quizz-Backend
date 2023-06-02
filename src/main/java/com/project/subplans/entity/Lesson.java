@@ -2,6 +2,8 @@ package com.project.subplans.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +17,11 @@ import lombok.NoArgsConstructor;
 public class Lesson {
     @Id
     private int id;
-    private int subID;
     private String lessonName;
+
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private Subject subject;
+
 
 }

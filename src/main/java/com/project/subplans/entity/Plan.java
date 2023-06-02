@@ -20,7 +20,6 @@ public class Plan {
     private float price;
     private float discount;
 
-    @OneToMany(mappedBy = "plan")
-    private List<Subject> subject;
+
 
 }
