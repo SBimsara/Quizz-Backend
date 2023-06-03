@@ -58,6 +58,17 @@ public class SubjectController {
         return subjectService.addLessonToSubject(subjectID,lessonID);
     }
 
+    @DeleteMapping("/removeLessonFromSubject/{subjectID}/{lessonID}")
+    public boolean removeLessonFromSubject(@PathVariable String subjectID, @PathVariable String lessonID){
+        return subjectService.removeLessonFromSubject(subjectID,lessonID);
+    }
+
+
+
+
+
+
+
     
 
 }

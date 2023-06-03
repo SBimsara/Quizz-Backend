@@ -79,6 +79,7 @@ public class SubjectService {
                 Lesson lesson = lessonRepo.getLessonByLessonID(lessonID);
 
                 subject.getLessons().add(lesson);
+
                 subjectRepo.save(subject);
                 return true;
             }
@@ -86,6 +87,26 @@ public class SubjectService {
         }
         return false;
     }
+
+    public boolean removeLessonFromSubject(String subjectID, String lessonID){
+
+        if(subjectRepo.existsById(Integer.parseInt(subjectID))){
+            Subject subject = subjectRepo.getSubjectBySubjectID(subjectID);
+
+            if(lessonRepo.existsById(Integer.parseInt(lessonID))){
+                Lesson lesson = lessonRepo.getLessonByLessonID(lessonID);
+
+                subject.getLessons().remove(lesson);
+                subjectRepo.save(subject);
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+
+
 
 
 }

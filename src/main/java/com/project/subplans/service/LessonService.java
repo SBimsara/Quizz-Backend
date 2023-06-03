@@ -3,6 +3,7 @@ package com.project.subplans.service;
 import com.project.subplans.dto.LessonDTO;
 import com.project.subplans.entity.Lesson;
 import com.project.subplans.repo.LessonRepo;
+import com.project.subplans.repo.SubjectRepo;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -16,6 +17,9 @@ public class LessonService {
 
     @Autowired
     private LessonRepo lessonRepo;
+
+    @Autowired
+    private SubjectRepo subjectRepo;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -48,6 +52,8 @@ public class LessonService {
         Lesson lesson =lessonRepo.getLessonByLessonIDAndSubID(lessonId,subID);
         return modelMapper.map(lesson,LessonDTO.class);
     }
+
+
 
 
 }

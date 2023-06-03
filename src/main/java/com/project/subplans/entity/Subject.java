@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -20,7 +21,7 @@ public class Subject {
     private String subjectname;
     private String grade;
 
-    @OneToMany(mappedBy = "subject")
-    private List<Lesson> lessons;
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
+    private Set<Lesson> lessons;
 
 }
