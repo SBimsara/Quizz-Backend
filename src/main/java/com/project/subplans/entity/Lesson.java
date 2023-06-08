@@ -16,6 +16,7 @@ public class Lesson {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String lessonName;
+    private int term;
 
     @ManyToOne
     @JoinColumn(name = "subject_id")

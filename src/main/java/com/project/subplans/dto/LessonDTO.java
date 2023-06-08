@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class LessonDTO {
     private int id;
     private String lessonName;
+    private int term;
     private Subject subject;
 
 
