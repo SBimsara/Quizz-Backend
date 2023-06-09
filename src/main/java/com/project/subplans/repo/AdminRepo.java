@@ -20,4 +20,8 @@ import org.springframework.data.jpa.repository.Query;
 public interface AdminRepo extends JpaRepository<Admin, Integer> {
     @Query(value = "SELECT * FROM admin WHERE username=?1 AND nic=?2 AND email=?3 AND contactNumber=?4", nativeQuery = true)
     Admin getAdmin(String nic, String contactNumber, String email, String username);
+    boolean existsByUsername(String username);
+    boolean existsByNic(String nic);
+    boolean existsByEmail(String email);
+    boolean existsByContactNumber(String contactNumber);
 }

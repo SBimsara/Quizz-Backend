@@ -9,8 +9,11 @@ import com.project.subplans.entity.Admin;
 import com.project.subplans.repo.AdminRepo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.validation.Valid;
 
 @Service
 @Transactional // Defines the scope of a single database transaction, that is, all the operations inside this service method will be performed as a single transaction
@@ -29,8 +32,40 @@ public class AdminService {
      @return The saved AdminDTO object
      */
 
-    public AdminDTO saveDetails(AdminDTO adminDTO) {
-        adminRepo.save(modelMapper.map(adminDTO, Admin.class));
-        return adminDTO;
+    public AdminDTO saveDetails(@Valid AdminDTO adminDTO) {
+        try {
+            // Check if the username is already taken
+            if (adminRepo.existsByUsername(adminDTO.getUsername())) {
+                throw new IllegalArgumentException("Username is already taken");
+            }
+
+            // Check if the NIC is already registered
+            if (adminRepo.existsByNic(adminDTO.getNic())) {
+                throw new IllegalArgumentException("NIC is already registered");
+            }
+
+            // Check if the email is already used
+            if (adminRepo.existsByEmail(adminDTO.getEmail())) {
+                throw new IllegalArgumentException("Email is already used");
+            }
+
+            // Check if the contact number is already used
+            if (adminRepo.existsByContactNumber(adminDTO.getContactNumber())){
+                throw new IllegalArgumentException("Contact number is already used");
+            }
+
+            // Map the AdminDTO to the Admin entity
+            Admin admin = modelMapper.map(adminDTO, Admin.class);
+
+            // Save the admin entity
+            adminRepo.save(admin);
+
+            // Map the saved Admin entity back to AdminDTO
+            return modelMapper.map(admin, AdminDTO.class);
+        } catch (DataAccessException e) {
+            // Handle the exception
+            // Log the error or perform any necessary error handling
+            throw new IllegalStateException("Failed to save admin details", e);
+        }
     }
 }
