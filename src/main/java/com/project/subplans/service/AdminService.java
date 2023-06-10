@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
+import java.util.NoSuchElementException;
 
 @Service
 @Transactional // Defines the scope of a single database transaction, that is, all the operations inside this service method will be performed as a single transaction
@@ -68,4 +69,25 @@ public class AdminService {
             throw new IllegalStateException("Failed to save admin details", e);
         }
     }
+    public AdminDTO getAdminByUsername(String username) {
+        try {
+            Admin admin = adminRepo.findByUsername(username);
+            if (admin == null) {
+                throw new NoSuchElementException("Admin not found");
+            }
+            return modelMapper.map(admin, AdminDTO.class);
+        } catch (DataAccessException e) {
+            throw new IllegalStateException("Failed to get admin by username", e);
+        }
+    }
+
+
 }
+
+
+
+
+
+
+
+

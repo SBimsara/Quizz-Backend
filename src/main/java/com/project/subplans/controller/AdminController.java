@@ -1,6 +1,7 @@
 package com.project.subplans.controller;
 
 import com.project.subplans.dto.AdminDTO;
+import com.project.subplans.dto.LoginDTO;
 import com.project.subplans.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,4 +29,28 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorMessage);
         }
     }
+
+    @PostMapping(value = "/login")
+    public ResponseEntity<Object> login(@RequestBody LoginDTO loginDTO) {
+        try {
+            AdminDTO adminDTO = adminService.getAdminByUsername(loginDTO.getUsername());
+
+            // Implement authentication logic here (e.g., compare username and password)
+            if (adminDTO != null && (adminDTO.getUsername().equals(loginDTO.getUsername()) && adminDTO.getPassword().equals(loginDTO.getPassword()))) {
+                // Authentication successful
+                String successMessage = "Login successful!";
+                return ResponseEntity.ok(successMessage);
+            } else {
+                // Invalid username or password
+                String errorMessage = "Invalid username or password";
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorMessage);
+            }
+        } catch (Exception e) {
+            String errorMessage = "Invalid username or password";
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorMessage);
+        }
+    }
+
+
+
 }
