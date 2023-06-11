@@ -8,8 +8,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class SubplansApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SubplansApplication.class, args);
+	public static void main(String[] args) {SpringApplication.run(SubplansApplication.class, args);
 	}
 
 	@Bean
