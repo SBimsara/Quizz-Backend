@@ -5,6 +5,7 @@ import com.project.subplans.dto.LoginDTO;
 import com.project.subplans.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +31,8 @@ public class AdminController {
         }
     }
 
-    @PostMapping(value = "/login")
-    public ResponseEntity<Object> login(@RequestBody LoginDTO loginDTO) {
+    @PostMapping(value = "/login", produces = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
         try {
             AdminDTO adminDTO = adminService.getAdminByUsername(loginDTO.getUsername());
 
@@ -46,11 +47,9 @@ public class AdminController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorMessage);
             }
         } catch (Exception e) {
-            String errorMessage = "Invalid username or password";
+            String errorMessage = "Failed to login";
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorMessage);
         }
     }
-
-
 
 }
