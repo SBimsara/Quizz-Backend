@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/v1/admin")
@@ -30,7 +31,6 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorMessage);
         }
     }
-
     @PostMapping(value = "/login", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
         try {
@@ -50,6 +50,32 @@ public class AdminController {
             String errorMessage = "Failed to login";
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorMessage);
         }
+    }
+
+    @GetMapping("/getAdmins")
+    public List<AdminDTO> getAdmins() {
+        return adminService.getAllAdmins();
+    }
+
+    @PostMapping("/saveAdmin")
+    public AdminDTO saveAdmin(@RequestBody AdminDTO adminDTO) {
+        return adminService.saveAdmin(adminDTO);
+    }
+
+    @PutMapping("/updateAdmin")
+    public AdminDTO updateAdmin(@RequestBody AdminDTO adminDTO) {
+        return adminService.updateAdmin(adminDTO);
+    }
+
+    @DeleteMapping("/deleteAdmin")
+    public boolean deleteAdmin(@RequestBody AdminDTO adminDTO) {
+        return adminService.deleteAdmin(adminDTO);
+    }
+
+    @GetMapping("/getAdminByAdminId/{adminId}")
+    public AdminDTO getAdminByAdminId(@PathVariable String adminId) {
+
+        return adminService.getAdminByAdminID(adminId);
     }
 
 }
