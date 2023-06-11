@@ -34,8 +34,9 @@ public class adminProfileController {
         return adminService.deleteAdmin(adminDTO);
     }
 
-    @GetMapping("/getAdminByAdminId/{userID}")
+    @GetMapping("/getAdminByAdminId/{adminId}")
     public AdminDTO getAdminByAdminId(@PathVariable String adminId) {
+
         return adminService.getAdminByAdminID(adminId);
     }
 }
