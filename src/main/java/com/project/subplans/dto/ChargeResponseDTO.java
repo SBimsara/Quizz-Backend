@@ -1,17 +1,17 @@
 package com.project.subplans.dto;
 
+
 import lombok.*;
 import org.springframework.stereotype.Component;
 
-@Component
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class ResponseDTO {
+@Component
+public class ChargeResponseDTO {
 
-    private String code;
-    private String message;
-    private Object content;
-
+    public String status;
+    public String id;
+    public String transactionId;
 }
