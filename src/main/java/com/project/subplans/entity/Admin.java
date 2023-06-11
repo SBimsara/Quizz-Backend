@@ -1,3 +1,4 @@
+
 // This class represents the entity for Admin, which will be mapped to a database table named "Admins".
 // It contains fields for storing various information about an Admin.
 package com.project.subplans.entity;
@@ -6,6 +7,7 @@ import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -79,7 +81,5 @@ public class Admin {
 
     // The isMainAdmin field represents whether an Admin is the main administrator or not.
     private boolean isMainAdmin;
-
-
 
 }

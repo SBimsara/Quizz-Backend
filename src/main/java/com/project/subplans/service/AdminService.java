@@ -1,12 +1,12 @@
+
 /*
 
  Service class for managing Admin entity
  */
 package com.project.subplans.service;
+   
 
-import com.project.subplans.dto.AdminDTO;
-import com.project.subplans.entity.Admin;
-import com.project.subplans.repo.AdminRepo;
+=======
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -15,6 +15,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
 import java.util.NoSuchElementException;
+
+import jakarta.transaction.Transactional;
+import org.apache.catalina.User;
+
+
+import com.project.subplans.dto.AdminDTO;
+import com.project.subplans.entity.Admin;
+import com.project.subplans.repo.AdminRepo;
+
+import org.modelmapper.TypeToken;
+
+
+import java.util.List;
 
 @Service
 @Transactional // Defines the scope of a single database transaction, that is, all the operations inside this service method will be performed as a single transaction
@@ -80,14 +93,35 @@ public class AdminService {
             throw new IllegalStateException("Failed to get admin by username", e);
         }
     }
+  
+  public AdminDTO saveAdmin(AdminDTO adminDTO){
+        adminRepo.save(modelMapper.map(adminDTO, Admin.class));
+        return adminDTO;
+    }
+
+    public List<AdminDTO> getAllAdmins(){
+        List<Admin>adminList=adminRepo.findAll();
+        return modelMapper.map(adminList, new TypeToken<List<AdminDTO>>(){}.getType());
+    }
+
+    public AdminDTO updateAdmin(AdminDTO adminDTO){
+        adminRepo.save(modelMapper.map(adminDTO, Admin.class));
+        return adminDTO;
+    }
+
+    public boolean deleteAdmin(AdminDTO adminDTO){
+        adminRepo.delete(modelMapper.map(adminDTO, Admin.class));
+        return true;
+    }
+
+
+    public AdminDTO getAdminByAdminID(String adminId){
+        Admin admin= adminRepo.getAdminByAdminID(adminId);
+        return modelMapper.map(admin, AdminDTO.class);
+    }
 
 
 }
-
-
-
-
-
 
 
 

@@ -63,4 +63,5 @@ public class AdminDTO {
     private String password;
 
     private boolean isMainAdmin;
+
 }
