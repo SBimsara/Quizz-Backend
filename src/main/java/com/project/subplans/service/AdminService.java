@@ -6,6 +6,7 @@
 package com.project.subplans.service;
    
 
+import com.project.subplans.dto.ResetPasswordDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -116,6 +117,22 @@ public class AdminService {
     public AdminDTO getAdminByAdminID(String adminId){
         Admin admin= adminRepo.getAdminByAdminID(adminId);
         return modelMapper.map(admin, AdminDTO.class);
+    }
+
+    public AdminDTO resetPassword(ResetPasswordDTO resetPasswordDTO) {
+        try {
+            Admin admin = adminRepo.findByUsername(resetPasswordDTO.getUsername());
+
+            if (admin != null) {
+                admin.setPassword(resetPasswordDTO.getNewPassword());
+                Admin updatedAdmin = adminRepo.save(admin);
+                return modelMapper.map(updatedAdmin, AdminDTO.class);
+            } else {
+                throw new NoSuchElementException("Admin not found");
+            }
+        } catch (DataAccessException e) {
+            throw new IllegalStateException("Failed to reset password", e);
+        }
     }
 
 
