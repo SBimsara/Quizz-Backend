@@ -4,6 +4,8 @@ import com.project.subplans.dto.ChargeRequestDTO;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
+import com.stripe.model.PaymentIntent;
+import com.stripe.param.PaymentIntentCreateParams;
 import jakarta.annotation.PostConstruct;
 import lombok.Value;
 import org.springframework.stereotype.Service;
@@ -21,15 +23,25 @@ public class PaymentService {
         Stripe.apiKey = stripeSecretKey;
     }
 
-    public Charge charge(ChargeRequestDTO chargeRequestDTO) throws StripeException {
-        Map chargeParams = new HashMap();
+    public String paymentProcess(ChargeRequestDTO chargeRequestDTO) throws StripeException {
+//        Map chargeParams = new HashMap();
 
-        chargeParams.put("amount", chargeRequestDTO.getAmount());
-        chargeParams.put("currency", chargeRequestDTO.getCurrency());
-        chargeParams.put("description", chargeRequestDTO.getDescription());
-        chargeParams.put("source", chargeRequestDTO.getStripeToken());
+//        chargeParams.put("amount", chargeRequestDTO.getAmount());
+//        chargeParams.put("currency", chargeRequestDTO.getCurrency());
+//        chargeParams.put("description", chargeRequestDTO.getDescription());
+//        chargeParams.put("source", chargeRequestDTO.getStripeToken());
+
+        PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
+                        .setAmount(chargeRequestDTO.getAmount())
+                        .setCurrency(chargeRequestDTO.getCurrency())
+                        .build();
+
+        PaymentIntent intent = PaymentIntent.create(params);
+        String clientSecret = intent.getClientSecret();
+        chargeRequestDTO.setStripeToken(clientSecret);
 
 
-        return Charge.create(chargeParams);
+//        return Charge.create(chargeParams);
+        return clientSecret;
     }
 }

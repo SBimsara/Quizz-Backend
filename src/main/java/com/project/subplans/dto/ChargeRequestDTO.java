@@ -13,7 +13,7 @@ import java.util.Set;
 @Data
 public class ChargeRequestDTO {
     private String description;
-    private int amount;
-    private Currency currency;
+    private long amount;
+    private String currency;
     private String stripeToken;
 }

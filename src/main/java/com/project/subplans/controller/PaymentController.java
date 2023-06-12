@@ -29,9 +29,10 @@ public class PaymentController {
 
 
     @PostMapping(value = "/charge")
-    public ChargeResponseDTO charge(@RequestBody ChargeRequestDTO chargeRequestDTO) throws StripeException {
-        Charge charge = paymentService.charge(chargeRequestDTO);
-        return chargeMapper.toChargeResponse(charge);
+    public String charge(@RequestBody ChargeRequestDTO chargeRequestDTO) throws StripeException {
+        String clientSecret = paymentService.paymentProcess(chargeRequestDTO);
+//        return chargeMapper.toChargeResponse(charge);
+        return clientSecret;
     }
 
 
