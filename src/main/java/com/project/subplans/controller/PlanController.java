@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/v1/plan")
-@CrossOrigin
+@CrossOrigin(origins={"http://localhost:3000","http://192.168.1.101:19000"})
 public class PlanController {
 
     @Autowired
@@ -25,6 +25,8 @@ public class PlanController {
 
     @PostMapping(value = "/savePlan")
     public ResponseEntity savePlan(@RequestBody PlanDTO planDTO) {
+//           return planService.savePlan(planDTO);
+
         try{
             String res=planService.savePlan(planDTO);
 
@@ -58,15 +60,30 @@ public class PlanController {
 
     }
 
-    @GetMapping("/getPlanByPId/{planId}")
-    public PlanDTO getPlanByPlanId(@PathVariable String planId) {
+    @GetMapping("/getPlanById/{planId}")
+    public ResponseEntity getPlanByPlanId(@PathVariable String planId) {
 
-        return planService.getPlanByPlanId(planId);
+//        return planService.getPlanByPlanId(planId);
+
+        try{
+            PlanDTO resp=planService.getPlanByPlanId(planId);
+            responseDTO.setCode(StatusList.RSP_SUCCESS);
+            responseDTO.setMessage("Success");
+            responseDTO.setContent(resp);
+            return new ResponseEntity(responseDTO, HttpStatus.ACCEPTED);
+        }
+        catch (Exception e){
+            responseDTO.setCode(StatusList.RSP_ERROR);
+            responseDTO.setMessage(e.getMessage());
+            responseDTO.setContent(null);
+            return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
     }
 
     @PutMapping(value = "/updatePlan")
     public ResponseEntity updatePlan(@RequestBody PlanDTO planDTO) {
+//        return planService.updatePlan(planDTO);
         try{
             String resp= planService.updatePlan(planDTO);
 
@@ -101,6 +118,7 @@ public class PlanController {
 
     @DeleteMapping("/deletePlan/{planId}")
     public ResponseEntity deletePlan(@PathVariable int planId) {
+//        return planService.deletePlan(planId);
         try{
             String res = planService.deletePlan(planId);
 
@@ -127,13 +145,15 @@ public class PlanController {
         }
     }
 
+
     @GetMapping(value = "/getAllPlans")
     public ResponseEntity getAllPlans (){
+//        return planService.getALlPlans();
         try{
-            List<PlanDTO> employeeDTOList = planService.getALlPlans();
+            List<PlanDTO> planDTOList = planService.getALlPlans();
             responseDTO.setCode(StatusList.RSP_SUCCESS);
             responseDTO.setMessage("Success");
-            responseDTO.setContent(employeeDTOList);
+            responseDTO.setContent(planDTOList);
             return new ResponseEntity(responseDTO, HttpStatus.ACCEPTED);
         }
 
@@ -145,6 +165,18 @@ public class PlanController {
         }
     }
 
+    @PutMapping(value = "addSubject/plans/{planId}/subjects/{subjectId}")
+    public boolean addSubjectToPlan(@PathVariable String planId,@PathVariable String subjectId){
+        return planService.addSubjectToPlan(planId,subjectId);
+
+
+    }
+
+    @DeleteMapping(value = "removeSubject/plans/{planId}/subjects/{subjectId}")
+    public boolean removeSubjectFromPlan(@PathVariable String planId,@PathVariable String subjectId){
+        return planService.removeSubjectFromPlan(planId,subjectId);
+
+    }
 
 
 
