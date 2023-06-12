@@ -10,4 +10,11 @@ public class StatusList {
     public static final String RSP_ERROR                ="05";
     public static final String RSP_DUPLICATED           ="06";
     public static final String RSP_FAIL                 ="10";
+
+    // Existing status codes
+    public static final String RSP_DUPLICATED_EMAIL = "duplicated_email";
+    public static final String RSP_DUPLICATED_USERNAME = "duplicated_username";
+    public static final String RSP_DUPLICATED_CONTACT_NUMBER = "duplicated_contact_number";
+    // New status code for duplicated NIC
+    public static final String RSP_DUPLICATED_NIC = "duplicated_nic";
 }
