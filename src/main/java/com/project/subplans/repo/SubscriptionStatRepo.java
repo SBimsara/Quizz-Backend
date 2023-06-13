@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface SubscriptionStatRepo extends JpaRepository <Subscription,Integer> {
 
-    @Query(value = "SELECT p.name , count(id) FROM Subscription s INNER JOIN Plan p WHERE s.planID = p.pid GROUP BY s.planid", nativeQuery = true)
+    @Query(value = "SELECT p.name , count(s.id) FROM Subscription s INNER JOIN Plan p WHERE s.planID = p.id GROUP BY s.planID", nativeQuery = true)
     List<Object[]> getGroupbyCount();
 
 
