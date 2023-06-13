@@ -43,8 +43,13 @@ public class PlanController {
                 responseDTO.setContent(planDTO);
                 return new ResponseEntity(responseDTO, HttpStatus.BAD_REQUEST);
 
-            }
-            else{
+            } else if (res.equals("07")) {
+                responseDTO.setCode(StatusList.RSP_DUPLICATED_NAME);
+                responseDTO.setMessage("Plan name already available");
+                responseDTO.setContent(planDTO);
+                return new ResponseEntity(responseDTO, HttpStatus.BAD_REQUEST);
+
+            } else{
                 responseDTO.setCode(StatusList.RSP_FAIL);
                 responseDTO.setMessage("Error");
                 responseDTO.setContent(null);

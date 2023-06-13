@@ -36,8 +36,10 @@ public class PlanService {
 
         if(planRepo.existsById(planDTO.getId())) {
             return StatusList.RSP_DUPLICATED;
-        }
-        else{
+        } else if (planRepo.existsByName(planDTO.getName())) {
+            return StatusList.RSP_DUPLICATED_NAME;
+            
+        } else{
             planRepo.save(modelMapper.map(planDTO, Plan.class));
             return StatusList.RSP_SUCCESS;
         }
