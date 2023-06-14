@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/v1/user")
-@CrossOrigin
+@CrossOrigin(origins="http://localhost:3000")
 public class LessonController {
 
     @Autowired
