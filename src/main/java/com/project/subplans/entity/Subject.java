@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
+
 import java.util.HashSet;
+
 import java.util.Set;
 
 
@@ -21,6 +23,10 @@ public class Subject {
     private int id;
     private String subjectname;
     private String grade;
+
+
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
+    private Set<Lesson> lessons;
 
 
     @JsonIgnoreProperties("subjects")
