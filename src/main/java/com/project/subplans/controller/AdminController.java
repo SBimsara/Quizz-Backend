@@ -78,4 +78,9 @@ public class AdminController {
         return adminService.getAdminByAdminID(adminId);
     }
 
+    @GetMapping("/getAdminCount")
+    public int getAdminCount() {
+        return adminService.getAdminCount();
+    }
+
 }

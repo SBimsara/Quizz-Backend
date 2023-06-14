@@ -58,6 +58,7 @@
 			<version>7.0.1.Final</version>
 		</dependency>
 
+
 		<!-- https://mvnrepository.com/artifact/com.stripe/stripe-java -->
 		<dependency>
 			<groupId>com.stripe</groupId>

@@ -28,7 +28,10 @@ public interface AdminRepo extends JpaRepository<Admin, Integer> {
     boolean existsByEmail(String email);
     boolean existsByContactNumber(String contactNumber);
   
-  @Query(value = "select * from admin where id=?1",nativeQuery = true)
+  @Query(value = "select * from Admins where id=?1",nativeQuery = true)
     Admin getAdminByAdminID(String adminId);
+
+  @Query(value = "select COUNT(id) from Admins",nativeQuery = true)
+    int getAdminCountByID();
 }
 

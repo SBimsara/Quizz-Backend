@@ -118,6 +118,11 @@ public class AdminService {
         return modelMapper.map(admin, AdminDTO.class);
     }
 
+    public int getAdminCount(){
+        int count = adminRepo.getAdminCountByID();
+        return count;
+    }
+
 
 }
 
