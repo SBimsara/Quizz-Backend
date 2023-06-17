@@ -5,21 +5,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-@Table(name = "Plan")
-public class Plan {
+public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int pid;
-    private String name;
-    private float price;
-    private float discount;
+    private int id;
+    private String lessonName;
+    private int term;
 
+    @ManyToOne
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
 
 
 }
