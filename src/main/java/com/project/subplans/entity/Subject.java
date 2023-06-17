@@ -1,9 +1,10 @@
 package com.project.subplans.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.HashSet;
 
 import java.util.Set;
 
@@ -11,7 +12,9 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Setter
+@Getter
+
 @Table(name = "Subject")
 public class Subject {
     @Id
@@ -20,7 +23,25 @@ public class Subject {
     private String subjectname;
     private String grade;
 
+
+
+    @JsonIgnoreProperties("subjects")
+    @ManyToMany(mappedBy = "subjects")
+    private Set<Plan> plans ;
+
+    public void addPlan(Plan plan) {
+        plans.add(plan);
+        plan.getSubjects().add(this);
+    }
+
+    public void removePlan(Plan plan) {
+        plans.remove(plan);
+        plan.getSubjects().remove(this);
+    }
+
+
     @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
     private Set<Lesson> lessons;
+
 
 }
