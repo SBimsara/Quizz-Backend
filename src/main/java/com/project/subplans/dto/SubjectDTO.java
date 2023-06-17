@@ -1,7 +1,13 @@
 package com.project.subplans.dto;
 
+
 import com.project.subplans.entity.Plan;
 import lombok.*;
+
+import java.util.Set;
+
+import com.project.subplans.entity.Lesson;
+
 
 import java.util.Set;
 
@@ -14,4 +20,7 @@ public class SubjectDTO {
     private String subjectname;
     private String grade;
     private Set<Plan> plans;
+
+    private Set<Lesson> lessons;
+
 }

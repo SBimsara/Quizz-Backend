@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
+
 import java.util.Set;
 
 
@@ -23,6 +24,7 @@ public class Subject {
     private String grade;
 
 
+
     @JsonIgnoreProperties("subjects")
     @ManyToMany(mappedBy = "subjects")
     private Set<Plan> plans ;
@@ -36,6 +38,10 @@ public class Subject {
         plans.remove(plan);
         plan.getSubjects().remove(this);
     }
+
+
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
+    private Set<Lesson> lessons;
 
 
 }

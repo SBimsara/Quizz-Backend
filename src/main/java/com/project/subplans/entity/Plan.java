@@ -23,6 +23,7 @@ public class Plan {
     private float price;
     private float discount;
 
+
     @JsonIgnoreProperties("plans")
     @ManyToMany
     @JoinTable(name = "Subscriptioned Subjects",
@@ -34,4 +35,5 @@ public class Plan {
     }
     )
     private Set<Subject> subjects;
+
 }
