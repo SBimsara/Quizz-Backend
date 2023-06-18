@@ -1,6 +1,6 @@
 package com.project.subplans.dto;
 
-import com.project.subplans.entity.Lesson;
+import com.project.subplans.entity.Plan;
 import lombok.*;
 
 import java.util.Set;
