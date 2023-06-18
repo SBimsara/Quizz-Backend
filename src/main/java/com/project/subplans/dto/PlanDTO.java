@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class PlanDTO {
-    private int id;
+    private int pid;
     private String name;
     private float price;
     private float discount;
