@@ -30,8 +30,8 @@ public class Plan {
             @JoinColumn(name = "plan_id",referencedColumnName = "id")
     },
     inverseJoinColumns = {
-            @JoinColumn(name = "subject_id",referencedColumnName = "id")
+            @JoinColumn(name = "subject_id",referencedColumnName = "subject_id")
     }
     )
-    private Set<Subject> subjects;
+    private Set<SubjectClass> subjects;
 }

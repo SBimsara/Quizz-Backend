@@ -13,5 +13,5 @@ public class SubjectDTO {
     private int id;
     private String subjectname;
     private String grade;
-    private Set<Plan> plans;
+//    private Set<Plan> plans;
 }

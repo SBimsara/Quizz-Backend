@@ -1,6 +1,6 @@
 package com.project.subplans.dto;
 
-import com.project.subplans.entity.Subject;
+import com.project.subplans.entity.SubjectClass;
 import lombok.*;
 
 import java.util.Set;
@@ -14,7 +14,7 @@ public class PlanDTO {
     private String name;
     private float price;
     private float discount;
-    private Set<Subject> subjects;
+    private Set<SubjectClass> subjects;
 
 
 }
