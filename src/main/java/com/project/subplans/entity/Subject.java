@@ -37,5 +37,19 @@ public class Subject {
         plan.getSubjects().remove(this);
     }
 
+    @JsonIgnoreProperties("subjects")
+    @ManyToMany(mappedBy = "subjects")
+    private Set<Plan> plans ;
+
+    public void addPlan(Plan plan) {
+        plans.add(plan);
+        plan.getSubjects().add(this);
+    }
+
+    public void removePlan(Plan plan) {
+        plans.remove(plan);
+        plan.getSubjects().remove(this);
+    }
+
 
 }

@@ -1,11 +1,9 @@
 package com.project.subplans.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 
 @Entity
@@ -14,8 +12,14 @@ import lombok.NoArgsConstructor;
 @Data
 public class Lesson {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int subID;
     private String lessonName;
+    private int term;
+
+    @ManyToOne
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
+
 
 }
