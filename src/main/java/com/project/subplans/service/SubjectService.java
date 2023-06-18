@@ -1,9 +1,9 @@
 package com.project.subplans.service;
 
 import com.project.subplans.dto.SubjectDTO;
-import com.project.subplans.entity.SubjectClass;
-import com.project.subplans.repo.LessonsRepo;
-import com.project.subplans.repo.SubjectsRepo;
+import com.project.subplans.entity.Subject;
+import com.project.subplans.repo.LessonRepo;
+import com.project.subplans.repo.SubjectRepo;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -18,35 +18,36 @@ import java.util.List;
 public class SubjectService {
 
     @Autowired
-    private SubjectsRepo subjectRepo;
+    private SubjectRepo subjectRepo;
 
     @Autowired
     private ModelMapper modelMapper;
 
-    @Autowired LessonsRepo lessonRepo;
+    @Autowired
+    LessonRepo lessonRepo;
 
     public SubjectDTO saveSubject(SubjectDTO subjectDTO) {
-        subjectRepo.save(modelMapper.map(subjectDTO, SubjectClass.class));
+        subjectRepo.save(modelMapper.map(subjectDTO, Subject.class));
         return subjectDTO;
     }
 
     public List<SubjectDTO> getAllSubjects() {
-        List<SubjectClass> subjectList = subjectRepo.findAll();
+        List<Subject> subjectList = subjectRepo.findAll();
         return modelMapper.map(subjectList, new TypeToken<List<SubjectDTO>>() {
         }.getType());
     }
 
     public SubjectDTO updateSubject(SubjectDTO subjectDTO) {
-        subjectRepo.save(modelMapper.map(subjectDTO, SubjectClass.class));
+        subjectRepo.save(modelMapper.map(subjectDTO, Subject.class));
         return subjectDTO;
     }
 
     public boolean deleteSubject(SubjectDTO subjectDTO) {
-        subjectRepo.delete(modelMapper.map(subjectDTO, SubjectClass.class));
+        subjectRepo.delete(modelMapper.map(subjectDTO, Subject.class));
         return true;
     }
     public SubjectDTO getSubjectBySubjectID(String subjectID){
-        SubjectClass subject=subjectRepo.getSubjectBySubjectID(subjectID);
+        Subject subject=subjectRepo.getSubjectBySubjectID(subjectID);
         return modelMapper.map(subject,SubjectDTO.class);
     }
 

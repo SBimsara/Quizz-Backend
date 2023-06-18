@@ -1,74 +1,48 @@
 package com.project.subplans.controller;
 
-import com.project.subplans.dto.SubjectDTO;
-import com.project.subplans.service.SubjectService;
-
-
+import com.project.subplans.entity.Subject;
+import com.project.subplans.repo.SubjectRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "api/v1/user")
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin
 public class SubjectController {
-
     @Autowired
-    private SubjectService subjectService;
+    private SubjectRepo subjectRepo;
 
-    @GetMapping("/getSubjects")
-    public List<SubjectDTO> getSubject() {
-        return subjectService.getAllSubjects();
+    @PostMapping("/subject")
+    Subject newSubject(@RequestBody Subject newSubject){
+        return subjectRepo.save(newSubject);
     }
 
-    @PostMapping("/saveSubject")
-    public SubjectDTO saveSubject(@RequestBody SubjectDTO subjectDTO) {
-        return subjectService.saveSubject(subjectDTO);
-    }
-    @PutMapping("/updateSubject")
-    public SubjectDTO updateSubject(@RequestBody SubjectDTO subjectDTO) {
-        return subjectService.updateSubject(subjectDTO);
+    @GetMapping("/subjects")
+    List<Subject> getAllSubjects(){
+        return subjectRepo.findAll();
     }
 
-    @DeleteMapping("/deleteSubject")
-    public boolean deleteSubject(@RequestBody SubjectDTO subjectDTO) {
-        return subjectService.deleteSubject(subjectDTO);
+    @GetMapping("/subject/{id}")
+    Optional<Subject> getSubjectById(@PathVariable Long id){
+        return subjectRepo.findById(id);
+
     }
 
-    @GetMapping("/getUserBySubjectId/{subjectID}")
-    public SubjectDTO getSubjectBySubjectID(@PathVariable String subjectID){
-        return subjectService.getSubjectBySubjectID(subjectID);
+    @DeleteMapping("/subject/{id}")
+    String deleteSubject(@PathVariable Long id){
+        subjectRepo.deleteById(id);
+        return "Succesfully deleted subject "+id+".";
     }
 
-//    @GetMapping("/getUserBySubjectIDAndGrade/{subjectID}/{grade}")
-//    public SubjectDTO getSubjectBySubjectIDAndGrade(@PathVariable String subjectID ,@PathVariable String grade){
-//        System.out.println("User ID :"+ subjectID +"User grade :" +grade);
-//        return subjectService.getSubjectBySubjectIDAndGrade(subjectID,grade);
-//    }
+    @PutMapping("/subject/{id}")
+    Optional<Subject> updateSubject(@RequestBody Subject newSubject, @PathVariable Long id){
+        return subjectRepo.findById(id)
+                .map(subjectClass ->{
+                    subjectClass.setSubject_name(newSubject.getSubject_name());
+                    return subjectRepo.save(subjectClass);
 
-    @DeleteMapping("/deleteSubjectById/{subId}")
-    public boolean deleteSubjectById(@PathVariable String subId) {
-        return subjectService.deleteSubjectById(subId);
+                });
     }
-
-//    @PutMapping("/addLessonToSubject/{subjectID}/{lessonID}")
-//    public boolean addLessonToSubject(@PathVariable String subjectID, @PathVariable String lessonID){
-//        return subjectService.addLessonToSubject(subjectID,lessonID);
-//    }
-//
-//    @DeleteMapping("/removeLessonFromSubject/{subjectID}/{lessonID}")
-//    public boolean removeLessonFromSubject(@PathVariable String subjectID, @PathVariable String lessonID){
-//        return subjectService.removeLessonFromSubject(subjectID,lessonID);
-//    }
-
-
-
-
-
-
-
-
-
 }

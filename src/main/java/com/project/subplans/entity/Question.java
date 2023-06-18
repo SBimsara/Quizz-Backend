@@ -17,7 +17,7 @@ public class Question {
 
     @ManyToOne
     @JoinColumn(name = "subject_id",referencedColumnName = "subject_id")
-    private SubjectClass subjectClass;
+    private Subject subject;
 
     @ManyToOne
     @JoinColumn(name = "term_id",referencedColumnName = "term_id")
@@ -25,7 +25,7 @@ public class Question {
 
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "lesson_id",referencedColumnName = "lesson_id")
-    private LessonClass lessonClass;
+    private Lesson lesson;
 
     @ManyToOne
     @JoinColumn(name = "quiz_type_id",referencedColumnName = "quiz_type_id")
@@ -59,12 +59,12 @@ public class Question {
         this.grade = grade;
     }
 
-    public SubjectClass getSubject() {
-        return subjectClass;
+    public Subject getSubject() {
+        return subject;
     }
 
-    public void setSubject(SubjectClass subject) {
-        this.subjectClass = subject;
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 
     public Term getTerm() {
@@ -75,12 +75,12 @@ public class Question {
         this.term = term;
     }
 
-    public LessonClass getLesson() {
-        return lessonClass;
+    public Lesson getLesson() {
+        return lesson;
     }
 
-    public void setLesson(LessonClass lesson) {
-        this.lessonClass = lesson;
+    public void setLesson(Lesson lesson) {
+        this.lesson = lesson;
     }
 
     public QuizType getQuizType() {

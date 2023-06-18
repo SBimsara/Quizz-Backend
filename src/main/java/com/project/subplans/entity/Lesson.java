@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "lessons")
-public class LessonClass {
+public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "lesson_id")
@@ -16,7 +16,7 @@ public class LessonClass {
 
     @ManyToOne
     @JoinColumn(name = "subject_id",referencedColumnName = "subject_id")
-    private SubjectClass subjectClass;
+    private Subject subject;
 
     @ManyToOne
     @JoinColumn(name = "term_id",referencedColumnName = "term_id")
@@ -40,12 +40,12 @@ public class LessonClass {
         this.grade = grade;
     }
 
-    public SubjectClass getSubject() {
-        return subjectClass;
+    public Subject getSubject() {
+        return subject;
     }
 
-    public void setSubject(SubjectClass subjectClass) {
-        this.subjectClass = subjectClass;
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 
     public Term getTerm() {

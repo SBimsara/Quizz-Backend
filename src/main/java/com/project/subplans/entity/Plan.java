@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -33,5 +31,5 @@ public class Plan {
             @JoinColumn(name = "subject_id",referencedColumnName = "subject_id")
     }
     )
-    private Set<SubjectClass> subjects;
+    private Set<Subject> subjects;
 }

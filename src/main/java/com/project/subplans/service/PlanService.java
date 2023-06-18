@@ -3,9 +3,9 @@ package com.project.subplans.service;
 
 import com.project.subplans.dto.PlanDTO;
 import com.project.subplans.entity.Plan;
-import com.project.subplans.entity.SubjectClass;
+import com.project.subplans.entity.Subject;
 import com.project.subplans.repo.PlanRepo;
-import com.project.subplans.repo.SubjectsRepo;
+import com.project.subplans.repo.SubjectRepo;
 import com.project.subplans.util.StatusList;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
@@ -23,7 +23,7 @@ public class PlanService {
     private PlanRepo planRepo;
 
     @Autowired
-    private SubjectsRepo subjectRepo;
+    private SubjectRepo subjectRepo;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -90,7 +90,7 @@ public class PlanService {
         if(planRepo.existsById(Integer.parseInt(planId))){
             Plan plan = planRepo.getPlanById(planId);
             if(subjectRepo.existsById(Long.parseLong(subjectId))){
-                SubjectClass subject = subjectRepo.getSubjectBySubjectID(subjectId);
+                Subject subject = subjectRepo.getSubjectBySubjectID(subjectId);
 
                 plan.getSubjects().add(subject);
                 planRepo.save(plan);
@@ -108,7 +108,7 @@ public class PlanService {
         if(planRepo.existsById(Integer.parseInt(planId))){
             Plan plan = planRepo.getPlanById(planId);
             if(subjectRepo.existsById(Long.parseLong(subjectId))){
-                SubjectClass subject = subjectRepo.getSubjectBySubjectID(subjectId);
+                Subject subject = subjectRepo.getSubjectBySubjectID(subjectId);
 
                 plan.getSubjects().remove(subject);
                 planRepo.save(plan);
