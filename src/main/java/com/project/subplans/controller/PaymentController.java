@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "api/v1/payment")
-@CrossOrigin(origins="http://10.10.19.51:19000")
+@CrossOrigin(origins={"*"})
 public class PaymentController {
     private final PaymentService paymentService;
 

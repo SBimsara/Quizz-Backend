@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface PlanRepo extends JpaRepository<Plan,Integer> {
 
-    @Query( value = "SELECT * FROM plan WHERE id=?1" ,nativeQuery = true)
+    @Query( value = "SELECT * FROM plan WHERE plan_id=?1" ,nativeQuery = true)
     Plan getPlanById(String planId);
 
     boolean existsByName(String name);

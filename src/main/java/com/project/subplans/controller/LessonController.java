@@ -13,7 +13,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin
+@RequestMapping(value = "api/v1/lesson")
+@CrossOrigin(origins={"*"})
 public class LessonController {
     @Autowired
     private LessonRepo lessonRepo;

@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/v1/plan")
-@CrossOrigin(origins={"http://localhost:3000","http://192.168.1.101:19000"})
+@CrossOrigin(origins={"*"})
 public class PlanController {
 
     @Autowired

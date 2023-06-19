@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin
+@RequestMapping(value = "api/v1/sub")
+@CrossOrigin(origins={"*"})
 public class SubjectController {
     @Autowired
     private SubjectRepo subjectRepo;

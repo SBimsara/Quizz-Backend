@@ -16,16 +16,18 @@ import java.util.Set;
 public class Plan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "plan_id")
+    private Long id;
+
     private String name;
-    private float price;
-    private float discount;
+    private Float price;
+    private Float discount;
 
     @JsonIgnoreProperties("plans")
     @ManyToMany
     @JoinTable(name = "Subscriptioned Subjects",
     joinColumns = {
-            @JoinColumn(name = "plan_id",referencedColumnName = "id")
+            @JoinColumn(name = "plan_id",referencedColumnName = "plan_id")
     },
     inverseJoinColumns = {
             @JoinColumn(name = "subject_id",referencedColumnName = "subject_id")

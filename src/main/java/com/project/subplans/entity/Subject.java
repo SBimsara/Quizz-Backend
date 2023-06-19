@@ -16,6 +16,10 @@ public class Subject {
 
     private String subject_name;
 
+    @ManyToOne
+    @JoinColumn(name = "grade_id",referencedColumnName = "grade_id")
+    private Grade grade;
+
     @JsonIgnoreProperties("subjects")
     @ManyToMany(mappedBy = "subjects")
     private Set<Plan> plans ;
